@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PakingAPI", "PakingAPI\PakingAPI.csproj", "{BFFA8263-0011-4DD4-9C5E-9CDCB7435DDF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFFA8263-0011-4DD4-9C5E-9CDCB7435DDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFFA8263-0011-4DD4-9C5E-9CDCB7435DDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFFA8263-0011-4DD4-9C5E-9CDCB7435DDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFFA8263-0011-4DD4-9C5E-9CDCB7435DDF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {91D0B262-9F74-4A5A-94E7-6A994E788D8B}
+	EndGlobalSection
+EndGlobal
