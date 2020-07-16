@@ -21,7 +21,6 @@ namespace PakingAPI.Services
             _logger.LogInformation($"Adding object of type {entity.GetType()}");
             _dbContext.Add(entity);
         }
-
         public virtual void Delete<T>(T entity) where T : class
         {
             _logger.LogInformation($"Deleting object of type {entity.GetType()}");
