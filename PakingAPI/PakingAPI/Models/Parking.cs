@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PakingAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,8 +19,10 @@ namespace PakingAPI.Model
         public string City { get; set; }
         [Required]
         public string StreetAdress { get; set; }    
-        public DateTime FreeParkingTime { get; set; }
-        public DateTime FreeParkingEndTime { get; set; }
-        public ICollection<UserParking> UserParkings { get; set; }
+        public string FreeParkingStart { get; set; }
+        public string FreeParkingEnd { get; set; }
+        public User User { get; set; }
+        public int UserID { get; set; }
+        public ICollection<Feedback> feedbacks { get; set; }
     }
 }

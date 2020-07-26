@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PakingAPI.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace PakingAPI.Model
         public int Age { get; set; }
         [RegularExpression(@"^[a-z0-9A-Z]{5, 30}.(com|se)$")]
         public string Email { get; set; }
-        public ICollection<UserParking> UserParkings { get; set; }
+        public ICollection<Parking> Parkings { get; set; }
+        public ICollection<Feedback> Feedbacks { get; set; }
     }
 }
