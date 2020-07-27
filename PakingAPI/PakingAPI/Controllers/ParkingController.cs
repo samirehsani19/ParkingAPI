@@ -34,7 +34,7 @@ namespace PakingAPI.Controllers
         /// <returns></returns>
         [HttpGet(Name = "GetAllParking")]
         public async Task<IActionResult> GetParkings([FromQuery] bool includeLinks = true,
-            [FromQuery] bool includeFeedback = false,[FromQuery] bool includeUser=false)
+            [FromQuery] bool includeFeedback = false, [FromQuery] bool includeUser = false)
         {
             try
             {
@@ -64,17 +64,24 @@ namespace PakingAPI.Controllers
         /// <param name="includeFeedback"></param>
         /// <param name="includeUser"></param>
         /// <returns></returns>
-        [HttpGet("{id:int}",Name = "GetParkingByID")]
+        [HttpGet("{id:int}", Name = "GetParkingByID")]
         public async Task<IActionResult> GetParkingByID(int id, [FromQuery] bool includeLinks = true,
-            [FromQuery] bool includeFeedback=false,[FromQuery] bool includeUser=false)
+            [FromQuery] bool includeFeedback = false, [FromQuery] bool includeUser = false)
         {
-            var result = await repo.GetParkingById(id, includeFeedback, includeUser);
-            ParkingDTO mapped = mapper.Map<ParkingDTO>(result);
-            if (includeLinks)
+            try
             {
-                mapped = HateoasMainLinks(mapped);
+                var result = await repo.GetParkingById(id, includeFeedback, includeUser);
+                ParkingDTO mapped = mapper.Map<ParkingDTO>(result);
+                if (includeLinks)
+                {
+                    mapped = HateoasMainLinks(mapped);
+                }
+                return Ok(mapped);
             }
-            return Ok(mapped);
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Database failure: {e.Message}");
+            }
         }
 
         /// <summary>
@@ -85,17 +92,24 @@ namespace PakingAPI.Controllers
         /// <param name="includeFeedback"></param>
         /// <param name="includeUser"></param>
         /// <returns></returns>
-        [HttpGet("{name}", Name ="GetParkingByStreetName")]
-        public async Task<IActionResult>GetParkingByStreetName(string name,
-            [FromQuery]bool includeLinks=true,[FromQuery]bool includeFeedback=false,[FromQuery]bool includeUser=false)
+        [HttpGet("{name}", Name = "GetParkingByStreetName")]
+        public async Task<IActionResult> GetParkingByStreetName(string name,
+            [FromQuery] bool includeLinks = true, [FromQuery] bool includeFeedback = false, [FromQuery] bool includeUser = false)
         {
-            var result = await repo.GetParkingByStreet(name, includeFeedback, includeUser);
-            var mapped = mapper.Map<ParkingDTO>(result);
-            if (includeLinks)
+            try
             {
-                mapped.feedbacks = mapped.feedbacks.Select(x => HateoasMainLinks(x)).ToList();
+                var result = await repo.GetParkingByStreet(name, includeFeedback, includeUser);
+                var mapped = mapper.Map<ParkingDTO>(result);
+                if (includeLinks)
+                {
+                    mapped.feedbacks = mapped.feedbacks.Select(x => HateoasMainLinks(x)).ToList();
+                }
+                return Ok(HateoasMainLinks(mapped));
             }
-            return Ok(HateoasMainLinks(mapped));
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Database failure {e.Message}");
+            }
         }
     }
 }

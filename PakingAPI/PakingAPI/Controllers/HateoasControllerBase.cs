@@ -38,5 +38,11 @@ namespace PakingAPI.Controllers
             pdto.Links.Add(UrlLink("Self", "GetParkingByStreetName", new { name = pdto.StreetAdress }));
             return pdto;
         }
+
+        internal UserDTO HateoasMainLinks(UserDTO dto)
+        {
+            dto.Links.Add(UrlLink("All", "GetAllUsers", null));
+            return dto;
+        }
     }
 }

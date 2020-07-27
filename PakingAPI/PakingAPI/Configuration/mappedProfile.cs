@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using PakingAPI.DTO;
 using PakingAPI.Model;
 using PakingAPI.Models;
+using PakingAPI.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,9 @@ namespace PakingAPI.Configuration
                   FeedbackID = c.FeedbackID,
                   Rate = c.Rate,
                   Comment = c.Comment,
+                  UserID=c.UserID,
                   User = null,
+                  ParkingID=c.ParkingID,
                   Parking = null
               })))
                 .ForPath(x => x.User, z => z.MapFrom(x => new User 
@@ -46,6 +49,7 @@ namespace PakingAPI.Configuration
                   FreeParkingStart=c.Parking.FreeParkingStart,
                   FreeParkingEnd=c.Parking.FreeParkingEnd,
                   feedbacks=null,
+                  UserID=c.Parking.UserID,
                   User=null,
               }))
                 .ForMember(x=> x.User, z=> z.MapFrom(c=> 
@@ -59,6 +63,31 @@ namespace PakingAPI.Configuration
                     Feedbacks=null,
                     Parkings=null
                 })).ReverseMap();
+
+            CreateMap<User, UserDTO>().ForMember(x => x.Parkings, z => z.MapFrom(c => c.Parkings
+              .Select(s => new Parking
+              {
+                  ParkingID = s.ParkingID,
+                  Country = s.Country,
+                  City = s.City,
+                  StreetAdress = s.StreetAdress,
+                  FreeParkingStart = s.FreeParkingStart,
+                  FreeParkingEnd = s.FreeParkingEnd,
+                  UserID = s.UserID,
+                  User = null,
+                  feedbacks = null,
+              })))
+                .ForMember(x => x.Feedbacks, z => z.MapFrom(c => c.Feedbacks
+                .Select(s => new Feedback
+                {
+                    FeedbackID = s.FeedbackID,
+                    Rate = s.Rate,
+                    Comment = s.Comment,
+                    ParkingID = s.ParkingID,
+                    UserID = s.UserID,
+                    Parking = null,
+                    User = null
+                }))).ReverseMap();
         }
     }
 }
