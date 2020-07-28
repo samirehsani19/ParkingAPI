@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PakingAPI.Services
 {
-    public interface IParkingRepo
+    public interface IParkingRepo:IRepository
     {
         Task<Parking[]> GetAllParking(bool includeFeedback,bool includeUser);
         Task<Parking> GetParkingById(int id, bool includeFeedback,bool includeUser);

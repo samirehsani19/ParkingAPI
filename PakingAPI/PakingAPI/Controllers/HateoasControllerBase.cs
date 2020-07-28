@@ -29,6 +29,7 @@ namespace PakingAPI.Controllers
         internal FeedbackDTO HateoasMainLinks(FeedbackDTO fDto)
         {
             fDto.Links.Add(UrlLink("all", "GetAllFeedback", null));
+            fDto.Links.Add(UrlLink("Self", "GetFeedbackByID", new { id = fDto.FeedbackID }));
             return fDto;
         }
         internal ParkingDTO HateoasMainLinks(ParkingDTO pdto)
@@ -42,6 +43,8 @@ namespace PakingAPI.Controllers
         internal UserDTO HateoasMainLinks(UserDTO dto)
         {
             dto.Links.Add(UrlLink("All", "GetAllUsers", null));
+            dto.Links.Add(UrlLink("Self", "GetUserByID", new { id = dto.UserID }));
+            dto.Links.Add(UrlLink("Self", "GetUserByName", new { name = dto.FirstName }));
             return dto;
         }
     }
