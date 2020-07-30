@@ -30,7 +30,7 @@ namespace PakingAPI.Services.Repositories
             return await query.ToArrayAsync();
         }
 
-        public virtual async Task<Feedback> GetFeedbackByID(int id, bool includeParking, bool includeUser)
+        public virtual async Task<Feedback> GetFeedbackByID(int id, bool includeParking=false, bool includeUser=false)
         {
             _logger.LogInformation($"Getting feedback by id: {id}");
             IQueryable<Feedback> query = _dbContext.Feedbacks.Where(x=> x.FeedbackID==id);

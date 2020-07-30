@@ -9,6 +9,6 @@ namespace PakingAPI.Services.Interfaces
     public interface IFeedbackRepository:IRepository
     {
         Task<Feedback[]> GetAllFeedbacks(bool includeParkings, bool IncludeUsers);
-        Task<Feedback> GetFeedbackByID(int id, bool includeParking, bool includeUser);
+        Task<Feedback> GetFeedbackByID(int id, bool includeParking=false, bool includeUser=false);
     }
 }

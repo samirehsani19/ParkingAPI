@@ -31,7 +31,7 @@ namespace PakingAPI.Services
             return await query.ToArrayAsync();
         }
 
-        public virtual async Task<User> GetUserByID(int id, bool includeParking, bool includeFeeback)
+        public virtual async Task<User> GetUserByID(int id, bool includeParking=false, bool includeFeeback=false)
         {
             _logger.LogInformation($"Getting user by id: {id}");
             IQueryable<User> query = _dbContext.Users.Where(x=> x.UserID==id);

@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PakingAPI.Hateoas;
+using System.Security.Policy;
 
 namespace PakingAPI.Controllers
 {
@@ -105,6 +106,93 @@ namespace PakingAPI.Controllers
                     mapped.feedbacks = mapped.feedbacks.Select(x => HateoasMainLinks(x)).ToList();
                 }
                 return Ok(HateoasMainLinks(mapped));
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Database failure {e.Message}");
+            }
+        }
+
+        /// <summary>
+        /// /api/v1.0/parking    To create a parking
+        /// </summary>
+        /// <param name="parkingDto"></param>
+        /// <returns></returns>
+        [HttpPost(Name ="PostParking")]
+        public async Task<IActionResult>PostParking(ParkingDTO parkingDto)
+        {
+            try
+            {
+                var mappedEntity = mapper.Map<Parking>(parkingDto);
+                repo.Add(mappedEntity);
+                if ( await repo.Save())
+                {
+                    return Created($"/api/v1.0/parking/{parkingDto.ParkingID}", mapper.Map<ParkingDTO>(mappedEntity));
+                }
+                return BadRequest();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Database failure {e.Message}");
+            }
+
+        }
+
+        /// <summary>
+        /// /api/v1.0/parking/1    To update a parking
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="parkingDto"></param>
+        /// <returns></returns>
+        [HttpPut("{id:int}", Name ="UpdateParkingByID")]
+        public async Task<IActionResult>UpdateParkingByID(int id, ParkingDTO parkingDto)
+        {
+            try
+            {
+                var oldParking = await repo.GetParkingById(id);
+                if (oldParking==null)
+                {
+                    return NotFound($"Parking with ID: {id} could not be found");
+                }
+                var newParking = mapper.Map(parkingDto, oldParking);
+                repo.Update(newParking);
+
+                if (await repo.Save())
+                {
+                    return NoContent();
+                }
+                else
+                    return BadRequest();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Database failure {e.Message}");
+            }
+        }
+
+        /// <summary>
+        /// /api/v1.0/parking/1    To delete parking by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpDelete("{id:int}", Name ="DeleteParkingBydID")]
+        public async Task<IActionResult>DeleteParkingByID(int id)
+        {
+            try
+            {
+                var parking = await repo.GetParkingById(id);
+                if (parking==null)
+                {
+                    return NotFound($"Parking with ID: {id}  could not be found");
+                }
+                repo.Delete(parking);
+                if (await repo.Save())
+                {
+                    return NoContent();
+                }
+                else
+                    return BadRequest();
+
             }
             catch (Exception e)
             {

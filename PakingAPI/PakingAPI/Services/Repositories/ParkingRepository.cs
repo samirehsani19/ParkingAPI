@@ -29,7 +29,7 @@ namespace PakingAPI.Services
             return await query.ToArrayAsync();
         }
 
-        public virtual async Task<Parking> GetParkingById(int id, bool includeFeedback, bool includeUser)
+        public virtual async Task<Parking> GetParkingById(int id, bool includeFeedback=false, bool includeUser=false)
         {
             _logger.LogInformation($"Getting parking by id: {id}");
             IQueryable<Parking> query = _dbContext.Parkings.Where(x => x.ParkingID == id);
