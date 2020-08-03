@@ -119,6 +119,7 @@ namespace PakingAPI.Controllers
         /// <param name="parkingDto"></param>
         /// <returns></returns>
         [HttpPost(Name ="PostParking")]
+        [ApiKeyAuthentication]
         public async Task<IActionResult>PostParking(ParkingDTO parkingDto)
         {
             try
@@ -145,6 +146,7 @@ namespace PakingAPI.Controllers
         /// <param name="parkingDto"></param>
         /// <returns></returns>
         [HttpPut("{id:int}", Name ="UpdateParkingByID")]
+        [ApiKeyAuthentication]
         public async Task<IActionResult>UpdateParkingByID(int id, ParkingDTO parkingDto)
         {
             try
@@ -176,6 +178,7 @@ namespace PakingAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id:int}", Name ="DeleteParkingBydID")]
+        [ApiKeyAuthentication]
         public async Task<IActionResult>DeleteParkingByID(int id)
         {
             try

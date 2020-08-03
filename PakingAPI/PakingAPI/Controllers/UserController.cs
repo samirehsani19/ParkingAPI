@@ -129,6 +129,7 @@ namespace PakingAPI.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost(Name ="PostUser")]
+        [ApiKeyAuthentication]
         public async Task<ActionResult<UserDTO>>PostUser(UserDTO dto)
         {
             try
@@ -154,6 +155,7 @@ namespace PakingAPI.Controllers
         /// <param name="user"></param>
         /// <returns></returns>
         [HttpPut("{id:int}", Name ="UpdateUserByID")]
+        [ApiKeyAuthentication]
         public async Task<IActionResult>UpdateUserByID(int id, UserDTO user)
         {
             try
@@ -185,6 +187,7 @@ namespace PakingAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id:int}", Name ="DeleteUserByID")]
+        [ApiKeyAuthentication]
         public async Task<IActionResult>DeleteUserByID(int id)
         {
             try

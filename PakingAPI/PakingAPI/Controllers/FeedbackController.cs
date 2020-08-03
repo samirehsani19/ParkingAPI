@@ -91,6 +91,7 @@ namespace PakingAPI.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPost(Name ="PostFeedback")]
+        [ApiKeyAuthentication]
         public async Task<IActionResult>PostFeedback(FeedbackDTO dto)
         {
             try
@@ -116,6 +117,7 @@ namespace PakingAPI.Controllers
         /// <param name="dto"></param>
         /// <returns></returns>
         [HttpPut("{id:int}", Name ="UpdateFeedbackByID")]
+        [ApiKeyAuthentication]
         public async Task<IActionResult>UpdateFeedbackByID(int id, FeedbackDTO dto)
         {
             try
@@ -147,6 +149,7 @@ namespace PakingAPI.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpDelete("{id:int}", Name ="DeleteFeedbackByID")]
+        [ApiKeyAuthentication]
         public async Task<IActionResult>DeleteFeedbackByID(int id)
         {
             try
