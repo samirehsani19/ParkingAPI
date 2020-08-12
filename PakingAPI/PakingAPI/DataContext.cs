@@ -16,6 +16,7 @@ namespace PakingAPI
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Parking> Parkings { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
+        public virtual DbSet<UserAccount> UserAccounts { get; set; }
         public DataContext() { }
        
         protected override void OnConfiguring (DbContextOptionsBuilder optionBuilder)

@@ -41,10 +41,10 @@ namespace PakingAPI
             {
                 c.SwaggerDoc(name: "v1", new OpenApiInfo {Title= "ParkingAPI", Version="v1", Description="Free parking API" });
 
-                //var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                //var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                //c.IncludeXmlComments(xmlPath);
-                //c.OperationFilter<HeaderParameter>();
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
+                c.OperationFilter<HeaderParameter>();
             });
 
         }
