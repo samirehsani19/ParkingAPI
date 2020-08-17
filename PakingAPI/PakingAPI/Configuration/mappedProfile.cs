@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 
 namespace PakingAPI.Configuration
 {
-    public class mappedProfile:Profile
+    public class MappedProfile:Profile
     {
-        public mappedProfile()
+        public MappedProfile()
         {
             CreateMap<Parking, ParkingDTO>().ForMember(x => x.feedbacks, x => x.MapFrom(z => z.feedbacks
               .Select(c => new Feedback
