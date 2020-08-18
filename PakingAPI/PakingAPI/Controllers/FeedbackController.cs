@@ -32,7 +32,7 @@ namespace PakingAPI.Controllers
         /// <param name="includeUser"></param>
         /// <returns></returns>
         [HttpGet(Name ="GetAllFeedback")]
-        public async Task<ActionResult<FeedbackDTO>>GetAllFeedbacks([FromQuery] bool includeLinks=true,
+        public async Task<ActionResult<FeedbackDTO[]>>GetAllFeedbacks([FromQuery] bool includeLinks=true,
             [FromQuery] bool includeParking=false ,bool includeUser=false)
         {
             try
