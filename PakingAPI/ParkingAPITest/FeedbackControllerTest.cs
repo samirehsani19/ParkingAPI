@@ -173,6 +173,38 @@ namespace ParkingAPITest
             Assert.Equal(204, contentResult.StatusCode);
         }
 
+        [Fact]
+        public async void DeleteFeedbackByID_IfIDExist_ExpectedDelete()
+        {
+            //Arrange
+            //create new mappedProfile
+            var profile = new MappedProfile();
+            var configuration = new MapperConfiguration(x=> x.AddProfile(profile));
+            var mapper = new Mapper(configuration);
+
+            //Mock repo
+            var feedbackrepo = new Mock<IFeedbackRepository>();
+            feedbackrepo.Setup(x => x.Delete<Feedback>(It.IsAny<Feedback>()));
+            feedbackrepo.Setup(x => x.GetFeedbackByID(It.IsAny<int>(), It.IsAny<Boolean>(), It.IsAny<Boolean>()))
+                .Returns(Task.FromResult(new Feedback()));
+            feedbackrepo.Setup(x => x.Save()).Returns(Task.FromResult(true));
+
+            //create actionDescriptor
+            var action = new List<ActionDescriptor>();
+            var descriptorProvider = new Mock<ActionDescriptorCollectionProvider>();
+            descriptorProvider.Setup(x => x.ActionDescriptors).Returns(new ActionDescriptorCollection(action, 0));
+
+            //create controller
+            var controller = new FeedbackController(feedbackrepo.Object, mapper, descriptorProvider.Object);
+
+            //Act
+            var result = await controller.DeleteFeedbackByID(1);
+            var contentResult = result as NoContentResult;
+            //Assert
+            Assert.Equal(204, contentResult.StatusCode);
+
+        }
+
         public List<Feedback>GetFeedbacks()
         {
             return new List<Feedback> 
