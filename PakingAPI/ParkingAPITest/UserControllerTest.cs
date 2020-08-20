@@ -45,7 +45,7 @@ namespace ParkingAPITest
 
             var controller = new UserController(userRepo, mapper, descriptorProvider.Object);
             //Act
-            var result = await controller.GetUsers();
+            var result = await controller.GetUsers(false);
             var contentResult = result as OkObjectResult;
             //Assert
             Assert.Equal(200, contentResult.StatusCode);

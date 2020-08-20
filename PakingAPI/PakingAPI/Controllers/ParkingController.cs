@@ -105,7 +105,7 @@ namespace PakingAPI.Controllers
                 {
                     mapped.feedbacks = mapped.feedbacks.Select(x => HateoasMainLinks(x)).ToList();
                 }
-                return Ok(HateoasMainLinks(mapped));
+                return Ok(mapped);
             }
             catch (Exception e)
             {
