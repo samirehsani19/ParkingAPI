@@ -25,7 +25,7 @@ namespace ParkingAPITest
     public class FeedbackControllerTest
     {
         [Fact]
-        public async void PostFeedback_IfNotNull_ExpectedOneFeedback()
+        public async void PostFeedback_IfNotNull_ExpectedNotNull()
         {
             //Arrange
             var profile = new MappedProfile();
@@ -58,14 +58,14 @@ namespace ParkingAPITest
 
             //Act
             var result = await controller.PostFeedback(dto);
-
-            //Assert
             var createdResult = result as CreatedResult;
             var dtoResult = (FeedbackDTO)createdResult.Value;
+
+            //Assert
             Assert.NotNull(dtoResult);
         }
         [Fact]
-        public async void GetAllFeedbacks_IfExist_GetOneFeedback()
+        public async void GetAllFeedbacks_IfExist_ExpectedTrue()
         {
             //Arrange
             var profile = new MappedProfile();
@@ -100,7 +100,7 @@ namespace ParkingAPITest
         [Theory]
         [InlineData(1, 1)]
         [InlineData(2, 2)]
-        public async void GetFeedbackById_IfIdExist_FeedbackExpected(int feedbackId, int expected)
+        public async void GetFeedbackById_IfIdExist_ExpectedFeedbackId(int feedbackId, int expected)
         {
             //Arrange
             var profile = new MappedProfile();
@@ -134,7 +134,7 @@ namespace ParkingAPITest
         }
 
         [Fact]
-        public async void UpdateFeedbackByID_IfIdExist_ExpectedUpdate()
+        public async void UpdateFeedbackByID_IfIdExist_Expected204StatusCode()
         {
             var profile = new MappedProfile();
             var configuration = new MapperConfiguration(x => x.AddProfile(profile));
@@ -174,7 +174,7 @@ namespace ParkingAPITest
         }
 
         [Fact]
-        public async void DeleteFeedbackByID_IfIDExist_ExpectedDelete()
+        public async void DeleteFeedbackByID_IfIDExist_Expected204StatusCode()
         {
             //Arrange
             //create new mappedProfile

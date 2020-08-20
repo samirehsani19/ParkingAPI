@@ -130,7 +130,7 @@ namespace PakingAPI.Controllers
         /// <returns></returns>
         [HttpPost(Name ="PostUser")]
         [ApiKeyAuthentication]
-        public async Task<ActionResult<UserDTO>>PostUser(UserDTO dto)
+        public async Task<IActionResult>PostUser(UserDTO dto)
         {
             try
             {
